@@ -78,9 +78,9 @@ def outputmsgs():
             out = "(unknown message type '" + ctype + "')"
             # print(entry)
         msg_stack.append("#" + mid + " - " + datetime.utcfromtimestamp(sent_at).strftime('%Y-%m-%d %H:%M:%S') + " - " + out + '\n')
-    res = not 'last' in outputmsgs.json_data["result"]["pagination"]
+    res = "next" in outputmsgs.json_data["result"]["pagination"]
     if res:
-        outputmsgs.next = outputmsgs.json_data["result"]["pagination"]["next"]
+       outputmsgs.next = outputmsgs.json_data["result"]["pagination"]["next"]
     return res
 
 print("exporting messages...")
