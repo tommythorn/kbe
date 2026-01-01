@@ -17,6 +17,7 @@ If your chat contains more than tow participants, simply list all their username
 ```sh
 ./kbe.py zapashcanon,emersion,facepalmer
 ``
+
 For group chats, try this repo: https://github.com/eilvelia/keybase-export
 
 ## License
