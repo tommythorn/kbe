@@ -4,6 +4,8 @@ kbe is a python script to export [Keybase] chats.
 
 ## Usage
 
+On Windows, make sure that filenames with the `.py` extension will open in Python by default (not in your text editor).
+
 Let's assume your keybase username is `zapashcanon` and that you have a chat with someone named `emersion`, to export this chat, you can just:
 
 ```sh
