@@ -10,6 +10,9 @@ import tempfile
 import typing
 from datetime import datetime
 
+sys.stdin.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding='utf-8')
+
 ap = argparse.ArgumentParser()
 ap.add_argument("conv_name", help="Conversation name")
 ap.add_argument(
@@ -128,7 +131,7 @@ log_out = os.path.join(conv_dir, "conv.log")
 
 json_out: typing.Optional[typing.IO[str]] = None
 if save_json:
-    json_out = open(os.path.join(conv_dir, "conv.json"), "w")
+    json_out = open(os.path.join(conv_dir, "conv.json"), "w", encoding="utf-8")
 
 
 def run_query(q):
@@ -242,7 +245,7 @@ print("exporting messages...", file=sys.stderr)
 query = build_query(conv_name, pagination_size=pg)
 last_page = None
 
-with tempfile.NamedTemporaryFile("w+", dir=conv_dir) as tf:
+with tempfile.NamedTemporaryFile("w+", dir=conv_dir, encoding="utf-8") as tf:
     while next_page := outputmsgs(query, dest=tf):
         if not next_page:
             break
@@ -259,5 +262,5 @@ with tempfile.NamedTemporaryFile("w+", dir=conv_dir) as tf:
             os.unlink(log_out)
         os.link(tf.name, log_out)
     else:
-        with open(log_out, "w") as outfile:
+        with open(log_out, "w", encoding="utf-8") as outfile:
             subprocess.run(["tac", "-s", ""], stdin=tf, stdout=outfile, check=True)
